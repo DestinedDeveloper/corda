@@ -156,10 +156,12 @@ In addition to ``jdbcSession``, ``ServiceHub`` also exposes the Java Persistence
 method. This method can be used to persist and query entities which inherit from ``MappedSchema``. This is particularly
 useful if off-ledger data must be maintained in conjunction with on-ledger state data.
 
-    .. note:: Your entity *must* sub-class ``MappedSchema``.
+    .. note:: Your entity must be included as a mappedType in as part of a MappedSchema for it to be added to Hibernate
+              as a custom schema. See Samples below.
 
-The code snippet below defines a ``PersistentFoo`` type inside ``FooSchemaV1``. This is exactly how schemas,
-except that the entity should not subclass ``PersistentState`` (as it is not a state object):
+The code snippet below defines a ``PersistentFoo`` type inside ``FooSchemaV1``. Note that ``PersistentFoo`` is added to
+a list of mapped types which is passed to ``MappedSChema``. This is exactly how state schemas are defined, except that
+the entity in this case should not subclass ``PersistentState`` (as it is not a state object). See examples:
 
 .. container:: codeset
 
